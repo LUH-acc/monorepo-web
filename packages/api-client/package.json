@@ -1,0 +1,28 @@
+{
+  "name": "@reddit/api-client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "generate": "node ./scripts/generate-api.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.16.1"
+  },
+  "devDependencies": {
+    "@reddit/config": "workspace:*",
+    "swagger-typescript-api": "^13.2.1",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  }
+}

@@ -1,0 +1,20 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+catalog:
+  typescript: ^5.7.3
+  vue-sonner: ^1.2.0
+  vite: ^6.1.0
+  vite-plugin-dts: ^4.5.0
+  vue-tsc: ^2.2.0
+
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - unrs-resolver
+  - vue-demi
+
+onlyBuiltDependencies:
+  - better-sqlite3
+  - sharp

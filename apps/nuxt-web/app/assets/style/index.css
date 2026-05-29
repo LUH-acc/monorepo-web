@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&family=Inter:wght@400;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --font-Inter-family: "Inter", system-ui, sans-serif;
+    --font-Archivo-family: "Archivo", system-ui, sans-serif;
+    --font-Syne-family: "Syne", system-ui, sans-serif;
+    --line-body: 1.5;
+}
+html {
+    overflow-x: clip;
+}
+html, body{
+    font-family: var(--font-Inter-family);
+    background-color: #F3F4F7;
+    text-align: center;
+    font-size: 16px;
+    line-height: var(--line-body);
+}
+.font-family-archivo-bold {
+    font-family: var(--font-Archivo-family);
+    font-weight: 700;
+    font-size: 48px;
+}
+
+@media (max-width: 640px) {
+    .font-family-archivo-bold {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    html, body {
+        font-size: 14px;
+    }
+}

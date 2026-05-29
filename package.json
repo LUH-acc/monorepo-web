@@ -1,0 +1,21 @@
+{
+  "name": "reddit",
+  "private": true,
+  "version": "1.0.0",
+  "description": "三项目 monorepo：A/B/C 可独立启动，共享模块在 packages",
+  "scripts": {
+    "dev:a": "pnpm --filter project-a dev",
+    "dev:b": "pnpm --filter project-b dev",
+    "dev:c": "pnpm --filter project-c dev",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter nuxt-web generate",
+    "build:b": "pnpm --filter project-b build",
+    "build:c": "pnpm --filter project-c build",
+    "build:core": "pnpm --filter @reddit/core build",
+    "build:api-client": "pnpm --filter @reddit/api-client build",
+    "generate:api": "pnpm --filter @reddit/api-client generate"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
