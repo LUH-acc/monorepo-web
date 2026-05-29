@@ -127,7 +127,7 @@ async function initServer(siteName: string, ip: string) {
                 console.log(`\x1B[36m[${siteName}]\x1B[0m 6/7 检查 default 配置是否已是目标内容...`)
                 const tempConfigPath = `/tmp/${siteName.replace(/[^a-zA-Z0-9.-]/g, '_')}-default.conf`
 
-                await uploadText(conn, tempConfigPath, nginxConfig)
+                await uploadText(conn, tempConfigPath, ngnixconfig)
                 const defaultConfigSame = await remoteCheck(
                     conn,
                     `test -f /etc/nginx/sites-enabled/default && cmp -s /etc/nginx/sites-enabled/default ${tempConfigPath}`,

@@ -17,5 +17,10 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.17",
+    "memfs": "^4.57.3",
+    "ssh2": "^1.17.0"
   }
 }

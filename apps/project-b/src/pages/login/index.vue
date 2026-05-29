@@ -3,7 +3,5 @@
 </script>
 
 <template>
-<div>
-  <router-view />
-</div>
+    <div>login page</div>
 </template>
