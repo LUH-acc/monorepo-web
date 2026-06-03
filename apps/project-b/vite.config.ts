@@ -2,11 +2,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
+import UnoCSS from 'unocss/vite'
 
 const appDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), UnoCSS()],
   resolve: {
     // 开发时直接指向 core 源码，改共享模块无需先 build
     alias: {

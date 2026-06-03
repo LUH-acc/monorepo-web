@@ -121,7 +121,7 @@ const handleMouseLeave = () => {
 </script>
 
 <template>
-    <div class="border-1">
+    <div >
         <div>
             <h2 class="mt-10 font-archivo font-weight-700 font-bold text-[24px] lg:text-[48px]">Trusted by Community
             </h2>

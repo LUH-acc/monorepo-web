@@ -20,7 +20,8 @@ import {
       'text-h3': 'font-archivo font-bold text-[40px]',
       'text-p': 'font-inter text-[#575D60] font-size-[18px] font-weight-400',
       'test-container': 'lg:max-w-[1280px] mx-auto px-4',
-      'btn-reset': 'appearance-none bg-transparent border-none p-0 m-0 cursor-pointer outline-none shadow-none ring-0 font-inherit text-inherit leading-inherit'
+      'btn-reset': 'appearance-none bg-transparent border-none p-0 m-0 cursor-pointer outline-none shadow-none ring-0 font-inherit text-inherit leading-inherit',
+      'web-container': 'lg:max-w-[1280px] mx-auto'
     },
     rules: [
         [/^m-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px` })],
@@ -62,6 +63,7 @@ import {
       fontFamily: {
         archivo: 'var(--font-Archivo-family), system-ui, sans-serif',
         inter: 'var(--font-Inter-family), system-ui, sans-serif',
+        'chivo-mono': 'var(--font-Chivo-Mono-family), ui-monospace, monospace',
       },
       breakpoints: {
         xs: '320px',

@@ -1,16 +1,103 @@
 <script setup lang="ts">
-import { useScroll, useMotionValueEvent,motion } from "motion-v"
+import { useScroll, useMotionValueEvent, motion } from "motion-v"
 import { cn } from "~/utils/cn"
 import BrowserScanLines from "./browser-scan-lines.vue"
 const platforms = ['AliExpress', 'Amazon', 'eBay', 'Facebook', 'Esty', 'Amazon'] as const
 const platforms2 = ['AliExpress2', 'Amazon2', 'eBay2', 'Facebook2', 'Esty2', 'Amazon2'] as const
 
 const browserRef = ref<HTMLElement | null>(null)
+const canvasRef = ref<HTMLCanvasElement | null>(null)
 const { scrollYProgress } = useScroll()
 const style = reactive({
     deg: 35
 })
+
+/** 单颗星星的状态 */
+interface Star {
+    x: number
+    y: number
+    radius: number
+    alpha: number
+    /** 向上移动速度（px / frame） */
+    speed: number
+}
+
+let stars: Star[] = []
+let starRafId = 0
+let starAnimationActive = false
+let canvasW = 0
+let canvasH = 0
+
+/** 初始化星星位置（只执行一次，避免每帧 random 导致闪烁） */
+function initStars(width: number, height: number, count = 120) {
+    stars = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.1 + 0.2,
+        alpha: 1,
+        speed: Math.random() * 0.12 + 0.04,
+    }))
+}
+
+/** 更新位置并绘制：超出顶部后从底部重新进入 */
+function renderStars(ctx: CanvasRenderingContext2D, width: number, height: number) {
+    ctx.clearRect(0, 0, width, height)
+
+    for (const star of stars) {
+        star.y -= star.speed
+        if (star.y < -star.radius) {
+            star.y = height + star.radius
+            star.x = Math.random() * width
+        }
+
+        ctx.beginPath()
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`
+        ctx.fill()
+    }
+}
+
+function animateStars() {
+    if (!starAnimationActive) return
+
+    const canvas = canvasRef.value
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    renderStars(ctx, canvasW, canvasH)
+    starRafId = requestAnimationFrame(animateStars)
+}
+
+const createCanvas = () => {
+    const canvas = canvasRef.value
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const dpr = window.devicePixelRatio || 1
+    const rect = canvas.getBoundingClientRect()
+    canvas.width = rect.width * dpr
+    canvas.height = rect.height * dpr
+    // ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+    canvasW = rect.width
+    canvasH = rect.height
+
+    initStars(canvasW, canvasH, 120)
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+        renderStars(ctx, canvasW, canvasH)
+        return
+    }
+
+    starAnimationActive = true
+    starRafId = requestAnimationFrame(animateStars)
+}
+
 onMounted(() => {
+    createCanvas()
     useMotionValueEvent(scrollYProgress, "change", () => {
         const el = browserRef.value
         if (!el)
@@ -75,7 +162,7 @@ onMounted(() => {
     marqueeActive = true
     rafId = requestAnimationFrame(tick)
     timeId = setInterval(() => {
-        if(animationShow.value) {
+        if (animationShow.value) {
             animationShow.value = false
         } else {
             animationShow.value = true
@@ -85,29 +172,67 @@ onMounted(() => {
 
 onUnmounted(() => {
     marqueeActive = false
+    starAnimationActive = false
     cancelAnimationFrame(rafId)
+    cancelAnimationFrame(starRafId)
     clearInterval(timeId)
 })
 </script>
 
 <template>
-    <div class="relative py-15 h-full overflow-hidden text-white">
+    <div class="relative py-15 h-full overflow-hidden text-white bg-gradient-to-b from-[#042144] to-[#726a6d]">
         <div class="w-full mx-auto absolute z-0 top-0 left-0 right-0 h-full">
-            <img src="~/assets/images/home-page/browser-bg.png" alt="browser-bg" class="w-full h-full">
+            <canvas ref="canvasRef" class="w-full h-[300px]" id="canvas">
+
+            </canvas>
+            <!-- <img src="~/assets/images/home-page/browser-bg.png" alt="browser-bg" class="w-full h-full"> -->
         </div>
         <div class="relative z-10 mx-auto test-container px-4">
             <div class="xs:w-[300px] md:w-[424px] mx-auto">
                 <img src="~/assets/images/home-page/Reviews.png" alt="browser-icon" class="w-full">
             </div>
             <h2 class="font-family-archivo-bold mx-auto leading-[1.5] whitespace-pre-line">
-                Premier Antidetect Browser <br> Streamline Your Workflow Effortlessly
+                Premier Antidetect Browser <br>
+                <div class="flex justify-center items-center gap-2">
+                    <div class="Streamline ">
+                        <span class="px-2">Streamline</span>
+
+                        <!-- <svg class="Streamline-arc" viewBox="0 0 300 8" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="streamline-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#F9B3B4" />
+                                    <stop offset="100%" stop-color="#38bdf8" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M0,4 Q100,0 300,4" stroke="url(#streamline-grad)" stroke-width="3" fill="none"
+                                stroke-linecap="round" />
+                        </svg> -->
+                        <!-- <svg class="position-x-center absolute -bottom-2" width="100%"
+                            xmlns="http://www.w3.org/2000/svg" height="17" viewBox="0 0 518 15" fill="none">
+                            <path class="path animate" d="M2 12.5C2 12.5 131.5 2.5 259 2.5C386.5 2.5 516 12.5 516 12.5"
+                                stroke="url(#paint0_linear_19351_59773)" stroke-width="6" stroke-linecap="round"></path>
+                            <defs>
+                                <linearGradient id="paint0_linear_19351_59773" x1="2" y1="2" x2="288.048" y2="30.9544"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0.3" stop-color="#EAA0F7"></stop>
+                                    <stop offset="0.9" stop-color="#3193FF"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg> -->
+                        <span>Your Workflow Effortlessly</span>
+                    </div>
+                    
+                </div>
             </h2>
 
             <div class="flex gap-2 justify-center mt-6">
-                <button class="rounded-[8px] py-3 px-4.5 bg-[linear-gradient(108deg,#238AFF_75%,#F9B3B4_100%)]">
+                <motion.button :initial="{ backgroundImage: 'linear-gradient(120deg, #238AFF 70%, #F9B3B4 100%)' }"
+                    :whileHover="{ backgroundImage: 'linear-gradient(120deg, #238AFF 20%, #F9B3B4 100%)' }"
+                    :transition="{ duration: 0.3, ease: 'easeInOut' }"
+                    class="rounded-[8px] w-[148px] h-[48px] py-3 px-4.5 ">
                     Try it Free
-                </button>
-                <button class="hidden lg:block rounded-[8px] py-3 px-6 bg-white/10 text-white">
+                </motion.button>
+                <button class="hidden lg:block w-[148px] h-[48px]  rounded-[8px] py-3 px-6 bg-white/10 text-white">
                     Contact us
                 </button>
             </div>
@@ -155,8 +280,9 @@ onUnmounted(() => {
 
             <div class="mt-11">
                 <div class="font-weight-400 mb-4.5 ">We protect every platform you use:</div>
-                <div ref="platformScrollerEl" class="platform-marquee -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0 flex lg:hidden">
-                    <ul class="flex flex-nowrap justify-center gap-6 md:mx-auto wh-full" >
+                <div ref="platformScrollerEl"
+                    class="platform-marquee -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0 flex lg:hidden">
+                    <ul class="flex flex-nowrap justify-center gap-6 md:mx-auto wh-full">
                         <template v-for="dep in 2" :key="dep">
                             <li v-for="(name, i) in platforms" :key="`${dep}-${i}`"
                                 class="shrink-0 whitespace-nowrap w-144px h-15 border-1 border-white/10 rounded-2xl flex items-center justify-center">
@@ -169,23 +295,27 @@ onUnmounted(() => {
                     <ul class=" w-full h-full flex flex-nowrap justify-center gap-6 md:mx-auto wh-full">
                         <motion.li v-for="(name, i) in platforms" :key="i"
                             class="shrink-0 whitespace-nowrap w-144px h-15 border-1 border-white/10 rounded-2xl flex items-center justify-center"
-                            :initial="{ opacity: 0, scale: 0 }" :animate="{ opacity: animationShow ? 1 : 0, scale: animationShow ? 1 : 0 }" :transition="{ duration: 0.3 }">
-                                {{ name }}
+                            :initial="{ opacity: 0, scale: 0 }"
+                            :animate="{ opacity: animationShow ? 1 : 0, scale: animationShow ? 1 : 0 }"
+                            :transition="{ duration: 0.3 }">
+                            {{ name }}
                         </motion.li>
                     </ul>
-                    <ul class="absolute left-0 top-0  w-full h-full flex flex-nowrap justify-center gap-6 md:mx-auto wh-full">
+                    <ul
+                        class="absolute left-0 top-0  w-full h-full flex flex-nowrap justify-center gap-6 md:mx-auto wh-full">
                         <motion.li v-for="(name, i) in platforms2" :key="i"
                             class="shrink-0 whitespace-nowrap w-144px h-15 border-1 border-white/10 rounded-2xl flex items-center justify-center"
-                            :initial="{ opacity: 0, scale: 0 }" :animate="{ opacity: animationShow ? 0 : 1, scale: animationShow ? 0 : 1 }" :transition="{ duration: 0.3 }">
-                                {{ name }}
+                            :initial="{ opacity: 0, scale: 0 }"
+                            :animate="{ opacity: animationShow ? 0 : 1, scale: animationShow ? 0 : 1 }"
+                            :transition="{ duration: 0.3 }">
+                            {{ name }}
                         </motion.li>
                     </ul>
                 </div>
             </div>
 
             <div class="relative mt-41">
-                <div
-                    class="w-full h-full" >
+                <div class="w-full h-full">
                     <!-- <img src="~/assets/images/home-page/global-reach.png" alt="global-reach" class="w-full h-full"> -->
                     <!-- 客户端渲染，避免在服务端渲染时，globe组件报错 -->
                     <ClientOnly>
@@ -200,8 +330,7 @@ onUnmounted(() => {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mattis, eros at pharetra
                         rutrum, ante odio fringilla urna</div>
 
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-between flex-wrap mt-20">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-between flex-wrap mt-20">
                         <div class="flex flex-col mt-5">
                             <span class="text1-title">Hours served</span>
                             <span class="text1">2,348,394</span>
@@ -243,6 +372,19 @@ onUnmounted(() => {
     </div>
 </template>
 <style scoped lang="scss">
+.Streamline {
+    position: relative;
+    display: inline-block;
+
+    .Streamline-arc {
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 8px;
+    }
+}
+
 /* 自动横滑时隐藏滚动条，仍可用触控板/手指滑动 */
 .platform-marquee {
     scrollbar-width: none;
@@ -290,31 +432,37 @@ onUnmounted(() => {
     transform-style: preserve-3d;
     backface-visibility: visible;
 }
+
 @keyframes liAnimation {
     0% {
         opacity: 0;
         transform: scale(0);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
     }
 }
+
 @keyframes li2Animation {
     0% {
         opacity: 1;
         transform: scale(1);
-        
+
     }
+
     100% {
         opacity: 0;
         transform: scale(0);
     }
 }
+
 .liAnimation {
     animation: liAnimation 1.2s ease-in;
     transition: all 0.8s;
 }
+
 .li2Animation {
     animation: li2Animation 1.2s ease-out;
     transition: all 0.8s;
