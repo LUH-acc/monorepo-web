@@ -3,7 +3,7 @@ const videoRef = ref<HTMLVideoElement | null>(null)
 </script>
 
 <template>
-    <div class="md:px-15">
+    <div class="test-container">
         <div class="web-container flex px-4 py-10 lg:py-20 lg:flex-row justify-between items-center flex-col lg:gap-[108px]">
        <div class="flex flex-col text-center lg:text-left lg:w-1/2">
         <h1 class="text-h3 text-[24px] lg:text-[48px]">🚀 Industry Recognition — RoxyBrowser Recommended by Leading Tech Creator RandomButCool</h1>

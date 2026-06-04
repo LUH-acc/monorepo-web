@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { trackRoute } from 'vue-router/dist/experimental/index.js'
+import FingerCanvasDemo from '~/components/fingerCanvasDemo.vue'
 
 const title = ref('Hello World from index.vue')
 const appConfig = useAppConfig()
@@ -100,6 +101,7 @@ definePageMeta({
     <NuxtLink to="/stylePage">Go to stylePage</NuxtLink>
   </div> -->
   <home-page />
+   <!-- <finger-canvas-demo /> -->
   <!-- <div class="mt-50">
     <button @click="add">add</button>
     <br>

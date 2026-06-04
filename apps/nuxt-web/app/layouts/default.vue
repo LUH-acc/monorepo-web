@@ -4,7 +4,7 @@ const testProps = ref('testProps')
 </script>
 
 <template>
-    <div class="bg-[linear-gradient(180deg,#F3F4F7_0%,#FFFFFF_110%)]">
+    <div class="bg-[#F3F4F7]">
       <header>
         <slot name="header">
           <!-- <h1>{{ headerTitle }}</h1> -->
@@ -13,7 +13,7 @@ const testProps = ref('testProps')
       <main>
         <slot />
       </main>
-      <footer class="mt-10">
+      <footer>
         <slot name="footer" :testProps="testProps">
         </slot>
       </footer>

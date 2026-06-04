@@ -191,11 +191,27 @@ onUnmounted(() => {
             <div class="xs:w-[300px] md:w-[424px] mx-auto">
                 <img src="~/assets/images/home-page/Reviews.png" alt="browser-icon" class="w-full">
             </div>
-            <h2 class="font-family-archivo-bold mx-auto leading-[1.5] whitespace-pre-line">
+            <h2
+                class="font-family-archivo-bold lg:font-size-[48px] font-size-[32px] mx-auto leading-[1.5] whitespace-pre-line">
                 Premier Antidetect Browser <br>
                 <div class="flex justify-center items-center gap-2">
                     <div class="Streamline ">
-                        <span class="px-2">Streamline</span>
+                        <span class=" relative ">Streamline
+                            <svg class="position-x-center absolute -bottom-2" width="100%"
+                                xmlns="http://www.w3.org/2000/svg" height="17" viewBox="0 0 518 15" fill="none">
+                                <path class="path animate"
+                                    d="M2 12.5C2 12.5 131.5 2.5 259 2.5C386.5 2.5 516 12.5 516 12.5"
+                                    stroke="url(#paint0_linear_19351_59773)" stroke-width="6" stroke-linecap="round">
+                                </path>
+                                <defs>
+                                    <linearGradient id="paint0_linear_19351_59773" x1="2" y1="2" x2="288.048"
+                                        y2="30.9544" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0.3" stop-color="#EAA0F7"></stop>
+                                        <stop offset="0.9" stop-color="#3193FF"></stop>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </span>
 
                         <!-- <svg class="Streamline-arc" viewBox="0 0 300 8" preserveAspectRatio="none">
                             <defs>
@@ -207,29 +223,17 @@ onUnmounted(() => {
                             <path d="M0,4 Q100,0 300,4" stroke="url(#streamline-grad)" stroke-width="3" fill="none"
                                 stroke-linecap="round" />
                         </svg> -->
-                        <!-- <svg class="position-x-center absolute -bottom-2" width="100%"
-                            xmlns="http://www.w3.org/2000/svg" height="17" viewBox="0 0 518 15" fill="none">
-                            <path class="path animate" d="M2 12.5C2 12.5 131.5 2.5 259 2.5C386.5 2.5 516 12.5 516 12.5"
-                                stroke="url(#paint0_linear_19351_59773)" stroke-width="6" stroke-linecap="round"></path>
-                            <defs>
-                                <linearGradient id="paint0_linear_19351_59773" x1="2" y1="2" x2="288.048" y2="30.9544"
-                                    gradientUnits="userSpaceOnUse">
-                                    <stop offset="0.3" stop-color="#EAA0F7"></stop>
-                                    <stop offset="0.9" stop-color="#3193FF"></stop>
-                                </linearGradient>
-                            </defs>
-                        </svg> -->
+
                         <span>Your Workflow Effortlessly</span>
                     </div>
-                    
+
                 </div>
             </h2>
 
             <div class="flex gap-2 justify-center mt-6">
                 <motion.button :initial="{ backgroundImage: 'linear-gradient(120deg, #238AFF 70%, #F9B3B4 100%)' }"
                     :whileHover="{ backgroundImage: 'linear-gradient(120deg, #238AFF 20%, #F9B3B4 100%)' }"
-                    :transition="{ duration: 0.3, ease: 'easeInOut' }"
-                    class="rounded-[8px] w-[148px] h-[48px] py-3 px-4.5 ">
+                    :transition="{ duration: 0.3, ease: 'easeInOut' }" class="rounded-[8px] font-500 py-3 px-6 ">
                     Try it Free
                 </motion.button>
                 <button class="hidden lg:block w-[148px] h-[48px]  rounded-[8px] py-3 px-6 bg-white/10 text-white">
@@ -237,11 +241,11 @@ onUnmounted(() => {
                 </button>
             </div>
 
-            <div class="text-center font-weight-400 text-white/60 mt-6">
+            <div class="text-center md:font-size-[20px] font-size-[16px] font-weight-400 text-white/60 mt-6">
                 Elevate your web journey with RoxyBrowser: Light, Secure, Limitless
             </div>
 
-            <div class="mt-11 relative perspective-wrapper" ref="browserRef">
+            <div class="mt-16 relative perspective-wrapper" ref="browserRef">
                 <!-- <ul class="w-full h-full">
                     <li
                         v-for="(layer, i) in SCAN_LINE_LAYER_STYLES"
@@ -260,18 +264,20 @@ onUnmounted(() => {
                         <BrowserScanLines />
                     </li>
                 </ul> -->
-                <div>
+                <div class="hidden lg:block">
                     <BrowserScanLines />
                 </div>
                 <div
-                    class="hidden md:flex justify-center z-1 items-center absolute left-1/2 top-[-3px] -translate-x-1/2 -translate-y-1/2  gap-4 font-size-4 rounded-full py-1 px-4 lg:bg-[linear-gradient(90deg,#3B84FA_0%,#7B75F0_50%,#FF846B_100%)]">
+                    class=" z-1 w-full pb-3 lg:pb-0 flex justify-center items-center absolute left-1/2 top-[-3px]  -translate-x-1/2 -translate-y-1/2  gap-4 font-size-4 ">
+                    <div class="flex justify-center items-center flex-wrap gap-[4px_20px] lg:flex-nowrap wrap lg:gap-6 py-1 pl-3 pr-4 rounded-full lg:bg-[linear-gradient(90deg,#3B84FA_0%,#7B75F0_50%,#FF846B_100%)]">
+                        <p class="text-white leading-24px font-size-4 whitespace-nowrap">20% OFF First Purchase</p>
+                        <p class="text-white leading-24px font-size-4 whitespace-nowrap">Free Proxy IPs</p>
+                        <p class="text-white leading-24px font-size-4 whitespace-nowrap">No Payment Fees</p>
+                    </div>
 
-                    <p class="text-white whitespace-nowrap">20% OFF First Purchase</p>
-                    <p class="text-white whitespace-nowrap">Free Proxy IPs</p>
-                    <p class="text-white whitespace-nowrap">No Payment Fees</p>
 
                 </div>
-                <div class="w-full" :style="{ transform: `rotate3d(1, 0, 0, ${style.deg}deg) translateZ(0)` }">
+                <div class="w-full pt-5 lg:pt-0" :style="{ transform: `rotate3d(1, 0, 0, ${style.deg}deg) translateZ(0)` }">
                     <div class="xs:px-4  mx-auto w-full aspect-[63/43]">
                         <img src="~/assets/images/home-page/display.png" alt="browser-icon" class="w-full object-cover">
                     </div>
@@ -280,7 +286,7 @@ onUnmounted(() => {
 
             <div class="mt-11">
                 <div class="font-weight-400 mb-4.5 ">We protect every platform you use:</div>
-                <div ref="platformScrollerEl"
+                <!-- <div ref="platformScrollerEl"
                     class="platform-marquee -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0 flex lg:hidden">
                     <ul class="flex flex-nowrap justify-center gap-6 md:mx-auto wh-full">
                         <template v-for="dep in 2" :key="dep">
@@ -290,6 +296,15 @@ onUnmounted(() => {
                             </li>
                         </template>
                     </ul>
+                </div> -->
+                <div class="flex gap-30px lg:hidden">
+                    <div class="flex flex-nowrap gap-30px animateTest" v-for="dep in 4" :key="dep">
+                        <ul class="flex flex-nowrap gap-30px">
+                            <li v-for="(name, i) in platforms" :key="`${dep}-${i}`" class="whitespace-nowrap w-144px h-15 border-1 border-white/10 rounded-2xl flex items-center justify-center">
+                                {{ name }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="relative px-4 md:mx-0 md:px-0 hidden lg:block">
                     <ul class=" w-full h-full flex flex-nowrap justify-center gap-6 md:mx-auto wh-full">
@@ -351,7 +366,7 @@ onUnmounted(() => {
                         conubia nostra, per inceptos himenaeos.
                     </div>
 
-                    <div class="relative md:w-full h-[300px] md:h-[120px] mx-auto mt-10 md:mt-32">
+                    <div class="relative md:w-full h-[300px] md:h-[120px] mx-auto mt-10 md:mt-32  mb-15">
                         <div class="absolute w-full h-full flex flex-col md:flex-row justify-between items-center p-10">
                             <div class="xs:font-size-[24px] xs:font-weight-700 text-left">Impressed? Download now and
                                 experience
@@ -361,7 +376,7 @@ onUnmounted(() => {
                                 class="rounded-[8px] py-3.5 px-5 shrink-0 bg-white/10 text-white cursor-pointer hover:bg-white/30 transition-all duration-300">
                                 Download for macOS</div>
                         </div>
-                        <div class="md:w-full h-full overflow-hidden rounded-2xl">
+                        <div class="md:w-full h-full  overflow-hidden rounded-2xl">
                             <img src="~/assets/images/home-page/download-bg.png" alt="download-mac"
                                 class=" w-full h-full object-cover">
                         </div>
@@ -466,5 +481,23 @@ onUnmounted(() => {
 .li2Animation {
     animation: li2Animation 1.2s ease-out;
     transition: all 0.8s;
+}
+
+.position-x-center {
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+.animateTest {
+    animation: animateTest 30s linear infinite;
+    animation-direction: normal;
+}
+@keyframes animateTest {
+    from {
+        transform: translateX(calc(-100% - 30px));
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 </style>

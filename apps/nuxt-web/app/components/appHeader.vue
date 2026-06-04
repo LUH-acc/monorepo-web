@@ -84,7 +84,7 @@ const handleMouseLeave = () => {
 <template>
   <div
     class="max-w-[375px] xs:max-w-[640px] h-12 text-white md:max-w-[1320px] mx-auto fixed top-0 left-0 right-0 z-100 px-4">
-    <div class="bg-[#0C1A31]/20 backdrop-blur-md rounded-3">
+    <div class="bg-white lg:bg-[#0C1A31]/20 text-black lg:text-white backdrop-blur-md rounded-3">
       <div class="relative flex w-full items-center  py-1.5 px-2  mt-3" :class="menuShow ? 'rounded-b-none' : ''">
         <div class="flex items-center gap-2">
           <NuxtLink to="/">
@@ -92,7 +92,7 @@ const handleMouseLeave = () => {
           </NuxtLink>
           <span>RoxyBrowser</span>
         </div>
-        <div class="hidden gap-3 ml-4 md:flex ">
+        <div class="hidden gap-3 ml-4 lg:flex ">
           <motion.div v-for="item in headerList" :key="item.title"
             class="py-1.5 px-3 font-weight-[500] font-size-[14px]  hover:bg-white/30 rounded-md cursor-pointer">
             <NavProvide>
@@ -103,17 +103,17 @@ const handleMouseLeave = () => {
           </motion.div>
         </div>
         <div class="ml-auto flex items-center">
-          <NuxtLink class="py-1.5 px-3 md:hidden hover:bg-white/30 rounded-md" @click="handlemobileMenuHeight">open menu
+          <NuxtLink class="py-1.5 px-3 lg:hidden hover:bg-white/30 cursor-pointer rounded-md" @click="handlemobileMenuHeight">open menu
           </NuxtLink>
-          <NuxtLink class="py-1.5 font-weight-500 font-size-[14px] px-5 border-1 border-white/30 rounded-md hidden md:block" @click="show = !show">登录</NuxtLink>
-          <NuxtLink class="py-1.5 font-weight-500 font-size-[14px] px-5 ml-3 bg-primary-blue text-white rounded-md hidden md:block" @click="show = !show">注册</NuxtLink>
+          <NuxtLink class="py-1.5 font-weight-500 font-size-[14px] px-5 border-1 border-white/30 rounded-md hidden lg:block" @click="show = !show">登录</NuxtLink>
+          <NuxtLink class="py-1.5 font-weight-500 font-size-[14px] px-5 ml-3 bg-primary-blue text-white rounded-md hidden lg:block" @click="show = !show">注册</NuxtLink>
         </div>
 
       </div>
       <!-- 移动端nav -->
       <Transition name="mobile-menu">
-        <div v-show="menuShow" class="md:hidden px-4 max-h-[calc(100dvh-124px)] relative overflow-y-auto">
-          <div class="h-[calc(100dvh-124px-62px)] overflow-y-auto flex flex-col justify-between">
+        <div v-show="menuShow" class="lg:hidden px-4 max-h-[calc(100dvh-124px)] relative overflow-y-auto">
+          <div class="overflow-y-auto flex flex-col justify-between">
             <div class="flex-1 overflow-y-auto">
               <ul class="flex flex-col gap-2 ">
                 <li v-for="item in mobileHeaderList" :key="item.title" class="border-b-1 last:border-b-0 border-b-white/20 py-4 mx-4">
@@ -135,7 +135,7 @@ const handleMouseLeave = () => {
               </ul>
             </div>
             <div class="grid grid-cols-2 gap-2 mb-4 font-weight-500 font-size-[14px]">
-              <div class="py-3 border-1  border-white/30 rounded-[8px]">login</div>
+              <div class="py-3 border-1 border-black/30 rounded-[8px]">login</div>
               <div class="py-3 bg-[#12A3FC] rounded-[8px]">register</div>
             </div>
           </div>

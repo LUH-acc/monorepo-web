@@ -37,7 +37,7 @@ onMounted(() => {
                         <div class="p-3.5 bg-[#F3F4F7] rounded-2xl w-[80px] h-[80px] md:w-[100px] md:h-[100px]">
                             <img src="~/assets/images/home-page/chrome.png" alt="account-card1" class="w-full h-full">
                         </div>
-                        <h2 class="font-family-archivo-bold text-2xl text-black pt-5">
+                        <h2 class="font-family-archivo-bold text-[24px] sm:text-[32px] lg:text-[48px] text-black pt-5">
                             Before Using RoxyBrowser
                         </h2>
                         <p class="pt-3 md:pt-5 md:font-size-[20px] font-weight-400 text-center md:text-left text-black">
@@ -61,7 +61,7 @@ onMounted(() => {
                         <div class="p-3.5 bg-[#F3F4F7] rounded-2xl w-[80px] h-[80px] md:w-[100px] md:h-[100px]">
                             <img src="~/assets/images/home-page/chrome.png" alt="account-card1" class="w-full h-full">
                         </div>
-                        <h2 class="font-family-archivo-bold text-2xl text-black pt-5">
+                        <h2 class="font-family-archivo-bold text-[24px] sm:text-[32px] lg:text-[48px] text-black pt-5">
                             Before Using RoxyBrowser
                         </h2>
                         <p class="pt-3 md:pt-5 md:font-size-[20px] font-weight-400 text-center md:text-left text-black">

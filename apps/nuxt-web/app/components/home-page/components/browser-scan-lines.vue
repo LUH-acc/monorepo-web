@@ -8,7 +8,7 @@ const variants = {
         return {
             x: '-240px',
             transition: {
-                delay: index * 1,
+                delay: index * 0.8,
                 duration: 4,
                 ease: [0.65, 0.05, 0.36, 1],
                 repeat: Infinity,
@@ -124,17 +124,17 @@ const variants6 = {
             </motion.ul>
             <motion.ul class="line-container" :style="{ transform: 'rotate(1deg)' }">
                 <motion.li v-for="n in 3" :key="n" animate="visible" :initial="{ x: '100vw' }" :custom="n"
-                    :variants="variants" class="line-item">
+                    :variants="variants4" class="line-item">
                 </motion.li>
             </motion.ul>
             <motion.ul class="line-container" :style="{ transform: 'rotate(2deg)' }">
                 <motion.li v-for="n in 3" :key="n" animate="visible" :initial="{ x: '100vw' }" :custom="n"
-                    :variants="variants2" class="line-item">
+                    :variants="variants5" class="line-item">
                 </motion.li>
             </motion.ul>
             <motion.ul class="line-container" :style="{ transform: 'rotate(4deg)' }">
                 <motion.li v-for="n in 3" :key="n" animate="visible" :initial="{ x: '100vw' }" :custom="n"
-                    :variants="variants3" class="line-item">
+                    :variants="variants6" class="line-item">
                 </motion.li>
             </motion.ul>
         </div>
@@ -165,7 +165,7 @@ const variants6 = {
                 </motion.li>
             </motion.ul>
             <motion.ul class="line-container" :style="{ transform: 'rotate(-4deg)' }">
-                <motion.li v-for="n in 3" :key="n" animate="visible" :initial="{ x: '100vw' }" :custom="n"
+                <motion.li v-for="n in 3" :key="n" animate="visible" :custom="n"
                     :variants="variants6" class="line-item">
                 </motion.li>
             </motion.ul>
@@ -176,7 +176,7 @@ const variants6 = {
 
 <style scoped lang="scss">
 .line-left {
-    transform: translateX(-75vw) translateY(-50%);
+    transform: translateX(-80vw) translateY(-50%);
     // border: 1px solid red;
 }
 .line-right {
