@@ -100,7 +100,8 @@ definePageMeta({
     <br>
     <NuxtLink to="/stylePage">Go to stylePage</NuxtLink>
   </div> -->
-  <home-page />
+  <!-- <home-page /> -->
+   <ring-animate />
    <!-- <finger-canvas-demo /> -->
   <!-- <div class="mt-50">
     <button @click="add">add</button>
